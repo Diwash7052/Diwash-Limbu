@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+ 
+  <style>
+   :root {
+  --primary-color: #6366f1; 
+  --accent-color: #14b8a6;  
+  --error-color: #ef4444;  
+  --success-color: #10b981; 
+  --bg-color: #f9fafb;
+  --text-color: #1f2937;
+  --border-radius: 10px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+.form-container {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 25%, #e0f7fa 60%, #f3e5f5 100%);
+  padding: 35px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  max-width: 500px;
+  width: 100%;
+  border: 3px solid transparent;
+  position: relative;
+}
+
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: -1;
+  border-radius: var(--border-radius);
+  background: linear-gradient(120deg, var(--primary-color), var(--accent-color));
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  color: var(--accent-color);
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 3px;
+  border: 2px solid #e5e7eb;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  outline: none;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 16px;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  background: linear-gradient(to right,yellow, rgb(253, 104, 4));
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 13px;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  min-height: 16px;
+}
+
+.success-message {
+  text-align: center;
+  color: var(--success-color);
+  background-color: #ecfdf5;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  border: 1px solid var(--success-color);
+}
+
+.error-field {
+  border-color: var(--error-color);
+}
+
+.success-field {
+  border-color: var(--success-color);
+}
+
+  </style>
+
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registration Form</h2>
+    
+    <h3>Name</h3>
+    <input type="text" id="name" placeholder="Enter your full name">
+    <p id="Vldname" class="error-message"></p>
+
+    <h3>Email</h3>
+    <input type="text" id="email" placeholder="example@domain.com">
+    <p id="VldEmail" class="error-message"></p>
+
+    <h3>Password</h3>
+    <input type="password" id="password" placeholder="At least 6 characters">
+    <p id="VldPassword" class="error-message"></p>
+
+    <h3>Re-type password</h3>
+    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+    <p id="VldConfirm" class="error-message"></p>
+
+    <h3>Phone Number</h3>
+    <input type="tel" id="phone" maxlength="10" placeholder="10-digit number">
+    <p id="VldPhone" class="error-message"></p>
+
+    <button onclick="validateForm()">Submit</button>
+    <p id="finalMessage"></p>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const confirmPassword = document.getElementById("confirmPassword");
+      const phone = document.getElementById("phone");
+
+      const Vldname = document.getElementById("Vldname");
+      const VldEmail = document.getElementById("VldEmail");
+      const VldPassword = document.getElementById("VldPassword");
+      const VldConfirm = document.getElementById("VldConfirm");
+      const VldPhone = document.getElementById("VldPhone");
+      const finalMessage = document.getElementById("finalMessage");
+
+      let isValid = true;
+
+      const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+      [Vldname, VldEmail, VldPassword, VldConfirm, VldPhone].forEach(el => {
+        el.textContent = "";
+      });
+      
+      [name, email, password, confirmPassword, phone].forEach(el => {
+        el.classList.remove("error-field", "success-field");
+      });
+
+      finalMessage.textContent = "";
+      finalMessage.className = "";
+
+      if (name.value.trim() === "") {
+        Vldname.textContent = "Name cannot be empty.";
+        name.classList.add("error-field");
+        isValid = false;
+      } else {
+        name.classList.add("success-field");
+      }
+
+      if (!emailPattern.test(email.value.trim())) {
+        VldEmail.textContent = "Invalid email format.";
+        email.classList.add("error-field");
+        isValid = false;
+      } else {
+        email.classList.add("success-field");
+      }
+
+      if (password.value.length < 6) {
+        VldPassword.textContent = "Password must be at least 6 characters.";
+        password.classList.add("error-field");
+        isValid = false;
+      } else {
+        password.classList.add("success-field");
+      }
+
+      if (password.value !== confirmPassword.value) {
+        VldConfirm.textContent = "Passwords do not match.";
+        confirmPassword.classList.add("error-field");
+        isValid = false;
+      } else if (password.value.length >= 6) {
+        confirmPassword.classList.add("success-field");
+      }
+
+      if (phone.value.trim().length !== 10 || isNaN(phone.value.trim())) {
+        VldPhone.textContent = "Phone number must be 10 digits.";
+        phone.classList.add("error-field");
+        isValid = false;
+      } else {
+        phone.classList.add("success-field");
+      }
+
+      if (isValid) {
+        finalMessage.textContent = "Form submitted successfully!";
+        finalMessage.className = "success-message";
+      }
+    }
+  </script>
+</body>
+</html>
