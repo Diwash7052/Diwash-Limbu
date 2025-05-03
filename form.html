@@ -3,148 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Neon Form Validation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>Neon Registration Form</title>
   <style>
-    :root {
-      --primary-color: #00f7ff;
-      --accent-color: #ff00c8;
-      --error-color: #ff4d4f;
-      --success-color: #00ff99;
-      --bg-color: #0d0d0d;
-      --text-color: #ffffff;
-      --radius: 10px;
-    }
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    }
+
+    :root {
+      --primary-color: #0ff;
+      --secondary-color: #f0f;
+      --neon-pink: #ff00ff;
+      --neon-blue: #00ffff;
+      --dark-bg: #111;
+      --input-bg: #1a1a1a;
+      --glow: 0 0 8px #0ff, 0 0 16px #0ff;
     }
 
     body {
-      font-family: 'Orbitron', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      background-color: var(--dark-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      padding: 30px;
     }
 
     .form-container {
-      background-color: #111;
-      border-radius: var(--radius);
-      box-shadow: 0 0 20px var(--accent-color);
-      padding: 40px;
-      max-width: 500px;
+      background: #0a0a0a;
+      padding: 30px 25px;
+      border-radius: 20px;
       width: 100%;
-      border: 2px solid var(--primary-color);
+      max-width: 420px;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 30px var(--neon-blue);
       position: relative;
-    }
-
-    .form-container::before {
-      content: "";
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      z-index: -1;
-      border-radius: var(--radius);
-      background: linear-gradient(45deg, var(--primary-color), var(--accent-color), #ffea00);
-      filter: blur(10px);
     }
 
     h2 {
       text-align: center;
       font-size: 28px;
-      color: var(--accent-color);
-      text-shadow: 0 0 10px var(--accent-color);
+      color: var(--neon-pink);
       margin-bottom: 25px;
+      text-shadow: 0 0 10px var(--neon-pink);
     }
 
     h3 {
-      font-size: 14px;
-      color: var(--primary-color);
-      margin-top: 18px;
       margin-bottom: 5px;
+      color: var(--neon-blue);
+      font-size: 15px;
     }
 
     input {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #333;
-      border-radius: var(--radius);
-      background-color: #000;
-      color: var(--text-color);
-      font-size: 15px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 8px #222 inset;
+      padding: 12px 40px 12px 15px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      font-size: 16px;
+      background-color: var(--input-bg);
+      color: #fff;
+      margin-bottom: 10px;
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.1);
+      transition: 0.3s ease;
     }
 
     input:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 8px var(--accent-color), 0 0 10px var(--accent-color) inset;
       outline: none;
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    button {
-      margin-top: 25px;
-      padding: 12px;
-      width: 100%;
-      font-size: 16px;
-      background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-      color: white;
-      border: none;
-      border-radius: var(--radius);
+    .input-container {
+      position: relative;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
-      transition: 0.4s ease;
-      box-shadow: 0 0 15px var(--primary-color);
-    }
-
-    button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 25px var(--accent-color);
-      background: linear-gradient(to right, #00ffcc, #ff00ff);
+      color: var(--neon-pink);
     }
 
     .error-message {
-      color: var(--error-color);
-      font-size: 12px;
-      margin-top: 3px;
+      color: #ff4b5c;
+      font-size: 13px;
+      height: 16px;
       margin-bottom: 5px;
-      min-height: 14px;
-      text-shadow: 0 0 5px var(--error-color);
     }
 
     .success-message {
-      margin-top: 20px;
-      color: var(--success-color);
       text-align: center;
+      margin-top: 15px;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+    }
+
+    button {
+      background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+      color: white;
       padding: 12px;
-      border: 1px solid var(--success-color);
-      background-color: rgba(0, 255, 153, 0.1);
-      border-radius: var(--radius);
+      font-size: 16px;
       font-weight: bold;
-      box-shadow: 0 0 10px var(--success-color);
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 25px;
+      box-shadow: 0 0 15px var(--neon-blue);
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px var(--neon-blue), 0 0 20px var(--neon-pink);
     }
 
     .error-field {
-      border-color: var(--error-color);
-      box-shadow: 0 0 10px var(--error-color);
+      border-color: #f00;
+      box-shadow: 0 0 10px #f00;
     }
 
     .success-field {
-      border-color: var(--success-color);
-      box-shadow: 0 0 10px var(--success-color);
+      border-color: #0f0;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>🚀Registration Form</h2>
+    <h2>Registration Form</h2>
 
     <h3>Name</h3>
     <input type="text" id="name" placeholder="Enter your full name">
@@ -155,11 +145,17 @@
     <p id="VldEmail" class="error-message"></p>
 
     <h3>Password</h3>
-    <input type="password" id="password" placeholder="At least 6 characters">
+    <div class="input-container">
+      <input type="password" id="password" placeholder="At least 6 characters">
+      <span class="eye-icon" onclick="toggleVisibility('password')">👁️</span>
+    </div>
     <p id="VldPassword" class="error-message"></p>
 
-    <h3>Re-type Password</h3>
-    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+    <h3>Re-type password</h3>
+    <div class="input-container">
+      <input type="password" id="confirmPassword" placeholder="Confirm your password">
+      <span class="eye-icon" onclick="toggleVisibility('confirmPassword')">👁️</span>
+    </div>
     <p id="VldConfirm" class="error-message"></p>
 
     <h3>Phone Number</h3>
@@ -167,10 +163,15 @@
     <p id="VldPhone" class="error-message"></p>
 
     <button onclick="validateForm()">Submit</button>
-    <p id="finalMessage"></p>
+    <p id="finalMessage" class="success-message"></p>
   </div>
 
   <script>
+    function toggleVisibility(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
     function validateForm() {
       const name = document.getElementById("name");
       const email = document.getElementById("email");
@@ -190,8 +191,8 @@
 
       [Vldname, VldEmail, VldPassword, VldConfirm, VldPhone].forEach(el => el.textContent = "");
       [name, email, password, confirmPassword, phone].forEach(el => el.classList.remove("error-field", "success-field"));
+
       finalMessage.textContent = "";
-      finalMessage.className = "";
 
       if (name.value.trim() === "") {
         Vldname.textContent = "Name cannot be empty.";
@@ -234,8 +235,7 @@
       }
 
       if (isValid) {
-        finalMessage.textContent = "🎉 Form submitted successfully!";
-        finalMessage.className = "success-message";
+        finalMessage.textContent = "Form submitted successfully!";
       }
     }
   </script>
