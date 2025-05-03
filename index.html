@@ -6,62 +6,65 @@
     <title>My Projects</title>
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-    
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-size: cover;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Orbitron', sans-serif;
+            background: #0f0f0f;
+            color: #00f7ff;
+            min-height: 100vh;
+            padding-bottom: 2rem;
         }
-    
+        
         .header {
             padding: 2rem 1rem;
             text-align: center;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: whitesmoke;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            margin-bottom: 2rem;
-            
+            background: linear-gradient(135deg, #00111a, #002f4b);
+            border-bottom: 4px solid #00ffe0;
+            box-shadow: 0 0 20px #00ffe0;
         }
-    
+        
         header h2 {
-            font-size: 1.3rem;
+            font-size: 1.8rem;
+            color: #00ffe0;
             margin-bottom: 0.5rem;
         }
-    
-        header h3, header h4 {
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
+        
+        header h3 {
+            font-size: 1.1rem;
+            color: #55f0ff;
         }
-    
+        
         #projects {
             padding: 2rem;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
         }
-    
+        
         .box-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
-    
+        
         .box {
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            background: #1a1a1a;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
             position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
         }
-    
+        
         .box::before {
             content: "";
             position: absolute;
@@ -69,70 +72,73 @@
             left: -3px;
             right: -3px;
             bottom: -3px;
-            z-index: -1;
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgb(65, 105, 225),rgb(98, 72, 247), rgb(225, 225, 240,1)),rgb(112,128,144.1);
+            background: linear-gradient(45deg, #00ffe0, #0ff, #0ff0ff, #00ffe0);
             background-size: 300% 300%;
-            animation: gradientBorder 6s ease infinite;
+            z-index: -1;
+            filter: blur(10px);
+            animation: borderGlow 6s linear infinite;
+            border-radius: 20px;
         }
-    
-        @keyframes gradientBorder {
+        
+        @keyframes borderGlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        .box:hover{
-            transform: translateY(-5px);
-         
-        }
-    
-        .box p {
-            font-weight: bold;
-            color: #7b1fa2;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-    
-        .box h5 {
-            font-size: 1.2rem;
-            color: #4a148c;
-            margin-bottom: 1rem;
-        }
-    
-        .btn {
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: linear-gradient(to right, blue, #08e45d);
-            color: white;
-            transition: all 0.4s ease;
-        }
-    
-        .btn:hover {
-            background: linear-gradient(to right,rgb(246, 47, 3), rgb(241, 102, 10));
+        
+        .box:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(248, 223, 2, 0.964);
+            box-shadow: 0 0 25px #00ffe0;
         }
-    
+        
+        .box p {
+            font-size: 1rem;
+            color: #66fcf1;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .box h5 {
+            font-size: 1.4rem;
+            color: #0abdc6;
+            margin-bottom: 1.2rem;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(90deg, #0ff, #00ffe0);
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 0 10px #00ffe0;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(90deg, #ff4ecd, #ff6ac1);
+            box-shadow: 0 0 20px #ff00c8;
+            transform: scale(1.08);
+        }
+        
         .btn:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
-    
+        
         @media (max-width: 600px) {
             header h2 {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
             }
-    
+        
             .btn {
                 padding: 10px 20px;
                 font-size: 13px;
             }
         }
+        </style>
+        
+
     </style>
     
     
